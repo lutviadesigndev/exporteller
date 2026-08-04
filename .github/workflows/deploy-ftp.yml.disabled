@@ -1,0 +1,42 @@
+# =============================================================================
+# deploy-ftp.yml.disabled — Deploy por FTP al hosting existente (caso clon de WP)
+# =============================================================================
+# Para activarlo: renombrá este archivo a "deploy-ftp.yml" (quitá .disabled).
+#
+# Sube la carpeta ./dist (el sitio ya compilado) por FTP al hosting donde hoy
+# corre WordPress. Pensado para reemplazar el WP por los estáticos.
+#
+# ANTES de activarlo, cargá los secrets en el repo:
+#   Settings → Secrets and variables → Actions → New repository secret
+#     FTP_SERVER    -> host FTP (ej: ftp.tudominio.com)
+#     FTP_USERNAME  -> usuario FTP
+#     FTP_PASSWORD  -> contraseña FTP
+#
+# Ajustá server-dir al directorio del hosting (típicamente public_html/ o www/).
+# ⚠️ Ojo: esto escribe sobre los archivos del hosting. Hacé backup del WP antes.
+# =============================================================================
+name: Deploy por FTP al hosting
+
+on:
+  workflow_dispatch:      # se dispara a mano desde la pestaña Actions
+  # push:
+  #   branches: [main]    # descomentá si querés deploy automático
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build
+      - name: Subir dist/ por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./public_html/   # <-- AJUSTAR al directorio de tu hosting

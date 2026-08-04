@@ -1,0 +1,40 @@
+---
+/**
+ * Header.astro — navegación compartida (reconstruida de exporteller.com).
+ * Los links usan import.meta.env.BASE_URL para funcionar en local y bajo el
+ * subdirectorio de GitHub Pages (/exporteller/).
+ */
+const base = import.meta.env.BASE_URL;
+const nav = [
+  { href: `${base}`, label: 'Home' },
+  { href: `${base}support`, label: 'Support' },
+  { href: `${base}terms`, label: 'Terms of Service' },
+  { href: `${base}privacy`, label: 'Privacy' },
+];
+---
+
+<header class="border-b border-line bg-surface/90 backdrop-blur sticky top-0 z-20">
+  <div class="mx-auto max-w-6xl px-4 h-20 flex items-center justify-between gap-4">
+    <a href={base} class="flex items-center" aria-label="Exporteller — Home">
+      <img
+        src={`${base}img/logo.png`}
+        alt="Exporteller"
+        width="180"
+        height="40"
+        class="h-8 w-auto"
+      />
+    </a>
+    <nav class="hidden md:flex items-center gap-1 text-sm font-medium text-ink-soft">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class="rounded-[var(--radius-sm)] px-4 py-2 hover:text-ink hover:bg-canvas-alt transition-colors"
+        >{item.label}</a>
+      ))}
+    </nav>
+    <a
+      href={`${base}support`}
+      class="md:hidden rounded-[var(--radius-sm)] bg-ink px-4 py-2 text-sm font-semibold text-white"
+    >Support</a>
+  </div>
+</header>

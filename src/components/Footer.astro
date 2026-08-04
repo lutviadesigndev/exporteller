@@ -1,0 +1,64 @@
+---
+/**
+ * Footer.astro — pie compartido (reconstruido de exporteller.com).
+ * Editá una vez, cambia en todo el sitio.
+ */
+const base = import.meta.env.BASE_URL;
+const year = new Date().getFullYear();
+const links = [
+  { href: `${base}support`, label: 'Support' },
+  { href: `${base}terms`, label: 'Terms of Service' },
+  { href: `${base}privacy`, label: 'Privacy' },
+];
+---
+
+<footer class="bg-ink text-white mt-24">
+  <div class="mx-auto max-w-6xl px-4 py-14">
+    <div class="grid gap-10 md:grid-cols-3">
+      <div>
+        <img
+          src={`${base}img/logo.png`}
+          alt="Exporteller"
+          width="180"
+          height="40"
+          class="h-8 w-auto brightness-0 invert"
+        />
+        <p class="mt-4 max-w-xs text-sm text-white/70">
+          Linking the world. Build your international brand from zero to hero.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-semibold uppercase tracking-wide text-white/90">Contact</h4>
+        <ul class="mt-4 space-y-2 text-sm text-white/70">
+          <li>24A Trolley Square #1178, Wilmington, DE 19806-3334, U.S.A</li>
+          <li>
+            <a href="https://wa.me/5493516133504" class="hover:text-brand-300 transition-colors">
+              +54 9 351 613 3504 (WhatsApp)
+            </a>
+          </li>
+          <li>
+            <a href="mailto:hello@exporteller.com" class="hover:text-brand-300 transition-colors">
+              hello@exporteller.com
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-semibold uppercase tracking-wide text-white/90">Links</h4>
+        <ul class="mt-4 space-y-2 text-sm text-white/70">
+          {links.map((l) => (
+            <li>
+              <a href={l.href} class="hover:text-brand-300 transition-colors">{l.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 border-t border-white/10 pt-6 text-sm text-white/60">
+      © {year} Exporteller LLC • All rights reserved
+    </div>
+  </div>
+</footer>

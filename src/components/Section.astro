@@ -1,0 +1,14 @@
+---
+/**
+ * Section.astro — contenedor de ancho consistente para secciones de página.
+ * Centraliza el max-width y el padding, así todas las secciones respiran igual.
+ */
+interface Props {
+  class?: string;
+}
+const { class: extra = '' } = Astro.props;
+---
+
+<section class:list={['mx-auto max-w-5xl px-4 py-16', extra]}>
+  <slot />
+</section>
