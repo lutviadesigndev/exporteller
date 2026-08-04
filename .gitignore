@@ -12,3 +12,5 @@ npm-debug.log*
 # macOS / editores
 .DS_Store
 .vscode/
+# Claude Code — ajustes locales/personales (launch.json y settings.json SÍ se versionan)
+.claude/settings.local.json
