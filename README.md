@@ -50,11 +50,15 @@ Todos los valores viven en `src/styles/global.css`, bloque `@theme`.
 ## Comandos
 
 ```bash
-npm install       # instalar dependencias (una vez)
-npm run dev       # servidor local en http://localhost:4321/exporteller/
-npm run build     # compila a ./dist (esto es lo que se publica)
-npm run preview   # previsualizar el build
+npm install        # instalar dependencias (una vez)
+npm run dev        # servidor local en http://localhost:4321/ (base '/', limpio)
+npm run build      # build STAGING → ./dist con base /exporteller/ (GitHub Pages)
+npm run build:prod # build PRODUCCIÓN → ./dist con base '/' (dominio propio, FTP)
+npm run preview    # previsualizar el build de staging
 ```
+
+El `base` se ajusta solo según el comando (ver [Deploy](#deploy) y `astro.config.mjs`),
+así que **staging y producción conviven** sin editar el config.
 
 ## Editar contenido
 
@@ -75,15 +79,16 @@ Cada push a `main` dispara `.github/workflows/deploy.yml` y republica https://lu
 
 ### Producción — FTP al hosting existente (reemplazar el WordPress)
 
-1. En `astro.config.mjs`, cambiar `base: '/exporteller/'` → `base: '/'` (el hosting sirve desde la raíz del dominio, no desde un subdirectorio).
-2. Renombrar `.github/workflows/deploy-ftp.yml.disabled` → `deploy-ftp.yml` y cargar los secrets del repo: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`. Ajustar `server-dir` (ej: `public_html/`).
-3. Alternativa manual: `scripts/deploy-ftp.sh` (requiere `lftp`).
+El sitio va en la **raíz del dominio**, no en el subdirectorio de Pages, por eso el build de producción usa `base: '/'`. Ya está separado del de staging, así que no hay que tocar `astro.config.mjs`:
 
-> ⚠️ Antes de sobrescribir el WordPress, hacé **backup** (archivos + base de datos) y probá primero en un subdominio o subcarpeta.
+1. **Manual:** `npm run build:prod` y subí el **contenido** de `./dist` al web root del hosting (`public_html/` o equivalente).
+2. **Automático:** renombrar `.github/workflows/deploy-ftp.yml.disabled` → `deploy-ftp.yml` y cargar los secrets del repo: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`. Ajustar `server-dir` (ej: `public_html/`). El workflow ya buildea con base `/` (`build:prod`). Alternativa manual asistida: `scripts/deploy-ftp.sh` (requiere `lftp`).
+
+> ⚠️ No subas el `dist` del `npm run build` normal a la raíz del dominio: tiene las rutas de Pages (`/exporteller/…`) y se rompe — usá `build:prod`. Y antes de sobrescribir el WordPress, hacé **backup** (archivos + base de datos) y probá primero en un subdominio o subcarpeta.
 
 ## Notas técnicas (decisiones del clon)
 
-- **`base` con barra final** (`/exporteller/`): los componentes arman rutas como `` `${base}support` ``, así que `import.meta.env.BASE_URL` debe terminar en `/`. Sin la barra, links e imágenes se rompen (`/exportellersupport`).
+- **`base` según contexto** (`astro.config.mjs`): `/` en dev (localhost limpio), `/exporteller/` en el build de staging (subdirectorio de Pages) y `/` en `build:prod` (dominio propio). Como todo se arma con `${import.meta.env.BASE_URL}…`, se adapta solo. Requisito: el `base` **debe terminar en `/`**; sin la barra las rutas se pegan (`/exportellersupport`, `/exportellerfavicon.svg`) y se rompen.
 - **Estilos base en `@layer base`** (`global.css`): en Tailwind v4 las utilidades viven en `@layer utilities`. Si las reglas de elemento (`h1..h4 { color }`) van **sin capa**, pisan a `text-white` y un título sobre fondo oscuro se vuelve ilegible. Por eso van dentro de `@layer base`.
 - **Año del copyright auto-actualizable:** en un estático `new Date().getFullYear()` se congela en el build. El footer lo resuelve con un `<script is:inline>` que actualiza el año en el cliente en cada visita (con el año del build como fallback sin JS).
 - **Menú mobile sin JS:** el hamburguesa usa `<details>`/`<summary>`, accesible por teclado y sin dependencias.

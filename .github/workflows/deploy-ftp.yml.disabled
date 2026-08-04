@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - run: npm run build
+      - run: npm run build:prod   # base '/' (raíz del dominio), NO el subdir de Pages
       - name: Subir dist/ por FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

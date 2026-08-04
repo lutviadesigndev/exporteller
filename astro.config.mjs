@@ -4,20 +4,21 @@ import tailwindcss from '@tailwindcss/vite';
 
 // Astro 5 + Tailwind v4 (Vite plugin — no @astrojs/tailwind integration needed).
 //
-// GitHub Pages (staging) sirve en un subdirectorio:
-//   https://lutviadesigndev.github.io/exporteller/
-// Por eso el BUILD necesita `base: '/exporteller/'`. Pero en DESARROLLO no hace
-// falta: dejamos `base: '/'` para que el local quede en http://localhost:4321/
-// (limpio) en vez de .../exporteller/. Como todos los links/assets del starter se
-// arman con `${import.meta.env.BASE_URL}…`, funcionan igual con cualquiera de los dos.
+// El `base` cambia según el contexto, y todo link/asset se arma con
+// `${import.meta.env.BASE_URL}…`, así que se adapta solo:
 //
-// Cuando el sitio pase a su dominio propio por FTP (raíz del dominio), poné
-// `base: '/'` fijo (borrá el condicional) y listo.
+//   - DEV (`npm run dev`)              → '/'              → localhost limpio.
+//   - BUILD staging (`npm run build`)   → '/exporteller/'  → subdirectorio de GitHub
+//                                         Pages (https://lutviadesigndev.github.io/exporteller/).
+//   - BUILD producción (`npm run build:prod`) → '/'        → dominio propio en la raíz
+//                                         (FTP). El script pasa SITE_BASE='/'.
+//
+// Así el staging de Pages y la producción por FTP conviven sin tocar este archivo.
 const isDev = process.argv.includes('dev');
 
 export default defineConfig({
   site: 'https://lutviadesigndev.github.io',
-  base: isDev ? '/' : '/exporteller/',
+  base: isDev ? '/' : (process.env.SITE_BASE || '/exporteller/'),
   vite: {
     plugins: [tailwindcss()],
   },
