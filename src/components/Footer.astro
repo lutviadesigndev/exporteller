@@ -58,7 +58,15 @@ const links = [
     </div>
 
     <div class="mt-12 border-t border-white/10 pt-6 text-sm text-white/60">
-      © {year} Exporteller LLC • All rights reserved
+      © <span id="footer-year">{year}</span> Exporteller LLC • All rights reserved
     </div>
   </div>
 </footer>
+
+<!--
+  El año se calcula en el build (fallback sin JS) y se actualiza en el cliente en
+  cada visita, así el copyright queda siempre al día aunque no se recompile el sitio.
+-->
+<script is:inline>
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>

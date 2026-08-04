@@ -5,77 +5,77 @@ import Button from '../components/Button.astro';
 
 const base = import.meta.env.BASE_URL;
 
+// Copy textual de exporteller.com (se conservan las expresiones originales).
 const features = [
   {
     icon: `${base}img/featur-tips.png`,
     title: 'Find talent everywhere',
-    text: 'Reach qualified professionals across the globe and grow your team without borders.',
+    text: 'Connect with the right professionals for your business or project. Save time and money.',
   },
   {
     icon: `${base}img/featur-support.png`,
-    title: 'Make business international',
-    text: 'Open your company to new markets and start selling your services and products worldwide.',
+    title: 'Make Business International',
+    text: 'We will identify potential prospects in other countries, help you connect with them and close sales even in other languages with the help of our team.',
   },
   {
     icon: `${base}img/feature-dua.png`,
     title: 'Discover new suppliers',
-    text: 'Connect with reliable partners and suppliers and expand your export operations.',
+    text: 'Think of suppliers as your business partners. We will search for the right B2B connection to improve your business.',
   },
+];
+
+const steps = [
+  'We will study your business to find the right market and opportunities for you',
+  'A consultant will follow your case personally and become part of your team',
+  'We will help you deliver your work, payments or products to other countries.',
 ];
 ---
 
 <Base title="Exporteller — Linking the world">
-  <!-- Hero -->
-  <Section class="pt-16 pb-8">
-    <div class="grid items-center gap-12 md:grid-cols-2">
-      <div>
-        <span class="inline-block rounded-[var(--radius-sm)] bg-accent-yellow px-3 py-1 text-xs font-semibold text-ink">
-          Linking the world
-        </span>
-        <h1 class="mt-5 text-4xl sm:text-5xl font-semibold leading-[1.08]">
-          Build your international brand from
-          <span class="text-brand-700">zero to hero.</span>
-        </h1>
-        <p class="mt-5 max-w-md text-lg text-ink-soft">
-          Looking to export your services or products? We can help! Our extensive
-          network connects US companies and international businesses so you can grow
-          across borders.
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <Button href="#getstarted">Get started</Button>
-          <Button href={`${base}support`} variant="secondary">Talk to us</Button>
+  <!-- Hero — banda cian de marca (fiel al original) -->
+  <div class="bg-brand-500">
+    <div class="mx-auto max-w-6xl px-4 pt-16 pb-14">
+      <div class="grid items-center gap-12 md:grid-cols-2">
+        <div>
+          <span class="inline-block rounded-[var(--radius-sm)] bg-ink px-3 py-1 text-xs font-semibold text-white">
+            Linking the world
+          </span>
+          <h1 class="mt-5 text-4xl sm:text-5xl font-semibold leading-[1.08] text-ink">
+            Build your international brand from zero to hero.
+          </h1>
+          <p class="mt-5 max-w-md text-lg text-ink/85">
+            Looking to export your services or products? We can help! Our extensive
+            network of professionals and companies around the world will open you a
+            door of new possibilities.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <Button href="#getstarted">Get started</Button>
+            <Button href={`${base}support`} variant="secondary">Talk to us</Button>
+          </div>
+        </div>
+        <div class="flex justify-center md:justify-end">
+          <img
+            src={`${base}img/ilus-dua.png`}
+            alt="A team assembling an international strategy together"
+            width="560"
+            height="610"
+            class="w-full max-w-md"
+          />
         </div>
       </div>
-      <div class="flex justify-center md:justify-end">
-        <img
-          src={`${base}img/ilus-dua.png`}
-          alt="A team assembling an international strategy together"
-          width="560"
-          height="610"
-          class="w-full max-w-md"
-        />
-      </div>
     </div>
-  </Section>
+  </div>
 
   <!-- Dos audiencias -->
-  <Section class="py-10">
+  <Section class="py-14">
     <div class="grid gap-6 md:grid-cols-2">
       <div class="rounded-[var(--radius-lg)] border border-line bg-surface p-8 shadow-[var(--shadow-card)]">
         <span class="text-xs font-semibold uppercase tracking-wide text-brand-700">US Companies</span>
-        <h2 class="mt-3 text-2xl font-semibold">Find qualified talent and clients around the world</h2>
-        <p class="mt-3 text-ink-soft">
-          Tap into a global network of professionals and buyers, and stay ahead in a
-          rapidly changing world.
-        </p>
+        <h2 class="mt-3 text-2xl font-semibold">Find qualify talent and clients around the world</h2>
       </div>
       <div class="rounded-[var(--radius-lg)] border border-line bg-canvas-alt p-8 shadow-[var(--shadow-card)]">
-        <span class="text-xs font-semibold uppercase tracking-wide text-accent-coral">International</span>
-        <h2 class="mt-3 text-2xl font-semibold">Sell to US companies and get paid in US Dollars</h2>
-        <p class="mt-3 text-ink-soft">
-          Offer your services and products to the US market and build a solid global
-          strategy from Latin America and beyond.
-        </p>
+        <span class="text-xs font-semibold uppercase tracking-wide text-accent-coral-ink">International</span>
+        <h2 class="mt-3 text-2xl font-semibold">Sell your services and products to US companies and get paid on US Dollars</h2>
       </div>
     </div>
   </Section>
@@ -94,10 +94,15 @@ const features = [
       </div>
       <div class="order-1 md:order-2">
         <span class="text-xs font-semibold uppercase tracking-wide text-brand-700">US Companies</span>
-        <h2 class="mt-3 text-3xl font-semibold">Stay ahead in a rapidly changing world</h2>
+        <h2 class="mt-3 text-3xl font-semibold">Stay ahead in a rapidly changing world.</h2>
         <p class="mt-4 text-ink-soft">
-          We help US companies find the right people, partners and opportunities,
-          wherever they are.
+          If you're ready to grow your business or accelerate your success with foreign
+          talent, we can help!
+        </p>
+
+        <p class="mt-6 text-xs font-semibold uppercase tracking-wide text-brand-700">How we work</p>
+        <p class="mt-1 font-medium text-ink">
+          We advice you throughout the process, from strategy to execution
         </p>
 
         <div class="mt-8 grid gap-5 sm:grid-cols-3">
@@ -117,13 +122,23 @@ const features = [
 
   <!-- International -->
   <Section class="py-14">
-    <div class="grid items-center gap-12 md:grid-cols-2">
+    <div class="grid items-start gap-12 md:grid-cols-2">
       <div>
-        <span class="text-xs font-semibold uppercase tracking-wide text-accent-coral">International</span>
+        <span class="text-xs font-semibold uppercase tracking-wide text-accent-coral-ink">International</span>
         <h2 class="mt-3 text-3xl font-semibold">Create a solid global strategy</h2>
         <p class="mt-4 text-ink-soft">
-          From Latin America to the world: reach US companies, get paid in US Dollars,
-          and turn your export ambitions into a repeatable, winning strategy.
+          Make the world your market. Tell us where you want to grow and we will get
+          you there.
+        </p>
+        <p class="mt-4 text-ink-soft">
+          At Exporteller LLC, we know how to find the right lead for your LATAM
+          business. We'll assign a trained team of Setters, Paid Media, and Digital
+          Marketing experts who will help you close meetings and new business.
+        </p>
+        <p class="mt-4 text-ink-soft">
+          In addition, we help you send and receive payments from around the world and
+          connect you with experts who will assist you in creating the correct tax
+          structure for your global business.
         </p>
         <div class="mt-7">
           <Button href="#getstarted">Get started</Button>
@@ -143,15 +158,28 @@ const features = [
 
   <!-- Working with us -->
   <Section class="py-14">
-    <div class="rounded-[var(--radius-lg)] bg-ink px-8 py-14 text-center text-white sm:px-14">
-      <span class="text-xs font-semibold uppercase tracking-wide text-brand-300">Working with us</span>
-      <h2 class="mx-auto mt-3 max-w-2xl text-3xl font-semibold text-white sm:text-4xl">
-        We're re-defining the way companies do business
-      </h2>
-      <p class="mx-auto mt-4 max-w-xl text-white/70">
-        One extensive network, endless connections. Wherever you are, we help you
-        link with the world.
-      </p>
+    <div class="rounded-[var(--radius-lg)] bg-ink px-8 py-14 text-white sm:px-14">
+      <div class="max-w-3xl">
+        <span class="text-xs font-semibold uppercase tracking-wide text-brand-300">working with us</span>
+        <h2 class="mt-3 text-3xl font-semibold text-white sm:text-4xl">
+          We're re-defining the way companies do business
+        </h2>
+        <p class="mt-4 text-white/75">
+          We bring deep, functional expertise across all industries and geographies.
+          We will help you in every step of the process conecting your business to
+          ideal customers and your projects to the right talent.
+        </p>
+      </div>
+      <div class="mt-10 grid gap-6 sm:grid-cols-3">
+        {steps.map((s, i) => (
+          <div class="rounded-[var(--radius-md)] border border-white/10 bg-white/5 p-6">
+            <div class="flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] bg-brand-500 text-sm font-bold text-ink">
+              {i + 1}
+            </div>
+            <p class="mt-4 text-sm text-white/85">{s}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </Section>
 
@@ -160,9 +188,7 @@ const features = [
     <div class="grid items-center gap-8 rounded-[var(--radius-lg)] border border-line bg-canvas-alt p-10 md:grid-cols-[1.4fr_1fr]">
       <div>
         <h2 class="text-3xl font-semibold">Ready to go global?</h2>
-        <p class="mt-3 max-w-md text-ink-soft">
-          Tell us about your project and our team will contact you as soon as possible.
-        </p>
+        <p class="mt-3 max-w-md text-ink-soft">Let's work together!</p>
       </div>
       <div class="flex flex-col gap-3 sm:flex-row md:flex-col">
         <Button href={`${base}support`}>Get started</Button>

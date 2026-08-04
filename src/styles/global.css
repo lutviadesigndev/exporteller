@@ -21,9 +21,9 @@
   --color-brand-400: #12e9f4;
   --color-brand-500: #07ebf2; /* cian brillante — fondos/acento */
   --color-brand-600: #06c2c8;
-  --color-brand-700: #088c93; /* texto/links sobre blanco (contraste AA) */
-  --color-brand-800: #0a6d72;
-  --color-brand-900: #0c565a;
+  --color-brand-700: #0b7378; /* texto/links sobre blanco — AA (~5:1) a 16px */
+  --color-brand-800: #0a5c60;
+  --color-brand-900: #0c4a4e;
 
   /* ---- Azul del isologo (globo de red) ---- */
   --color-logo-blue: #2e7dd1;
@@ -31,13 +31,14 @@
   /* ---- Acentos de la paleta (ilustraciones + tiles) ---- */
   --color-accent-yellow: #ffd957;      /* tiles de features, gráficos */
   --color-accent-yellow-soft: #fff3cf;
-  --color-accent-coral: #ff5c72;       /* rosa/coral de las ilustraciones */
+  --color-accent-coral: #ff5c72;       /* rosa/coral decorativo (ilustraciones) */
+  --color-accent-coral-ink: #c62a45;   /* variante oscura para TEXTO coral — AA sobre blanco */
   --color-accent-coral-soft: #ffe0e5;
   --color-brand-cyan-soft: #d6fcfe;    /* tint suave del cian para fondos */
 
   /* ---- Neutrales (navy de exporteller) ---- */
   --color-ink: #262e33;        /* texto principal, títulos, botón primario */
-  --color-ink-soft: #7a7a80;   /* texto secundario / cuerpo */
+  --color-ink-soft: #6b6b73;   /* texto secundario / cuerpo — AA (~4.8:1) sobre blanco */
   --color-line: #e6e8ea;       /* bordes / divisores */
   --color-surface: #ffffff;    /* fondo de tarjetas */
   --color-canvas: #ffffff;     /* fondo de página */
@@ -57,22 +58,28 @@
   --shadow-card: 0 1px 2px rgb(38 46 51 / 0.05), 0 12px 32px rgb(38 46 51 / 0.08);
 }
 
-/* ---- Base: aplica los tokens al documento ---- */
-html {
-  scroll-behavior: smooth;
-}
-body {
-  background-color: var(--color-canvas);
-  color: var(--color-ink-soft);
-  font-family: var(--font-body);
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  font-weight: 600; /* Poppins SemiBold, fiel al peso de los títulos del original */
-  color: var(--color-ink);
-  text-wrap: balance;
-  letter-spacing: -0.01em;
+/* ---- Base: aplica los tokens al documento ----
+   IMPORTANTE: va en @layer base para que las utilidades de color de Tailwind
+   (text-white, text-white/70, etc.) ganen la cascada. Sin la capa, estas reglas
+   de elemento pisarían a las utilidades y un `text-white` sobre fondo oscuro se
+   vería del color de `--color-ink` (texto oscuro sobre oscuro → ilegible). */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink-soft);
+    font-family: var(--font-body);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600; /* Poppins SemiBold, fiel al peso de los títulos del original */
+    color: var(--color-ink);
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
 }

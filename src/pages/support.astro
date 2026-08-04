@@ -23,7 +23,7 @@ const formAction = 'https://formsubmit.co/hello@exporteller.com';
       </span>
       <h1 class="mt-5 text-4xl font-semibold sm:text-5xl">Our support is here to help you.</h1>
       <p class="mt-4 text-lg text-ink-soft">
-        Don't hesitate to contact us. Please fill out the form below and we will
+        Don't hesitate to contact us. Please fill out the form below, we will
         contact you as soon as possible!
       </p>
     </div>
@@ -79,6 +79,7 @@ const formAction = 'https://formsubmit.co/hello@exporteller.com';
             name="Category"
             class="mt-1.5 w-full rounded-[var(--radius-sm)] border border-line bg-canvas px-3 py-2.5 text-ink outline-none focus:border-brand-500"
           >
+            <option value="" disabled selected>Select the category that best fits your issue or question:</option>
             <option>About the service</option>
             <option>Payment processing</option>
             <option>Feedback</option>
@@ -97,7 +98,7 @@ const formAction = 'https://formsubmit.co/hello@exporteller.com';
           type="submit"
           class="mt-6 inline-flex items-center justify-center rounded-[var(--radius-sm)] bg-ink px-7 py-3 text-sm font-semibold text-white shadow-[var(--shadow-card)] transition-colors hover:bg-brand-700"
         >
-          Send message
+          Submit
         </button>
       </form>
 
